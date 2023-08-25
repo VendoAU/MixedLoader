@@ -1,0 +1,17 @@
+plugins {
+    id "java"
+}
+
+archivesBaseName = "${mod_name}-common-${minecraft_version}"
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            mod_id     : mod_id,
+            pack_format: pack_format
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(["pack.mcmeta"]) {
+        expand replaceProperties + [project: project]
+    }
+}

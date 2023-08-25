@@ -1,0 +1,13 @@
+subprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "Sponge"
+            url = "https://repo.spongepowered.org/repository/maven-public"
+        }
+        maven {
+            name = "BlameJared"
+            url = "https://maven.blamejared.com"
+        }
+    }
+}

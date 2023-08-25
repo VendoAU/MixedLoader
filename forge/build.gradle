@@ -1,0 +1,63 @@
+plugins {
+    id "idea"
+    id "net.neoforged.gradle" version "[6.0.18,6.2)"
+    id "org.parchmentmc.librarian.forgegradle" version "1.+"
+}
+
+archivesBaseName = "${mod_name}-forge-${minecraft_version}"
+
+minecraft {
+    mappings channel: mappings_channel, version: mappings_version
+
+    copyIdeResources = true
+
+    runs {
+        configureEach {
+            ideaModule("${rootProject.name}.${project.name}.main")
+            property "forge.enabledGameTestNamespaces", mod_id
+            mods {
+                source sourceSets.main
+                source project(":common").sourceSets.main
+            }
+        }
+
+        client {
+        }
+
+        server {
+            args "--nogui"
+        }
+    }
+}
+
+dependencies {
+    minecraft "net.neoforged:forge:${minecraft_version}-${neoforge_version}"
+    compileOnly project(":common")
+    compileOnly project(":data")
+
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+}
+
+sourceSets.main.resources {
+    srcDir("../data/src/generated/resources")
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version: minecraft_version,
+            mod_id           : mod_id,
+            mod_version      : version,
+            mod_name         : mod_name,
+            mod_license      : mod_license,
+            mod_authors      : mod_authors,
+            mod_description  : mod_description,
+            mod_homepage_url : mod_homepage_url,
+            mod_issues_url   : mod_issues_url,
+            mod_update_url   : mod_update_url
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(["META-INF/mods.toml"]) {
+        expand replaceProperties + [project: project]
+    }
+}

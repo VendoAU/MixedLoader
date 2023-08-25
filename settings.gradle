@@ -1,0 +1,25 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = "NeoForged"
+            url = "https://maven.neoforged.net/releases"
+        }
+        maven {
+            name = "Fabric"
+            url = "https://maven.fabricmc.net"
+        }
+        maven {
+            name = "Parchment"
+            url = "https://maven.parchmentmc.org"
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "MixedLoader"
+include "common"
+include "data"
+include "forge"
+include "fabric"
+
