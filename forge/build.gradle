@@ -7,7 +7,7 @@ plugins {
 archivesBaseName = "${mod_name}-forge-${minecraft_version}"
 
 minecraft {
-    mappings channel: mappings_channel, version: mappings_version
+    mappings channel: "parchment", version: "${parchment_version}-${minecraft_version}"
 
     copyIdeResources = true
 
@@ -42,22 +42,8 @@ sourceSets.main.resources {
     srcDir("../data/src/generated/resources")
 }
 
-tasks.withType(ProcessResources).configureEach {
-    var replaceProperties = [
-            minecraft_version: minecraft_version,
-            mod_id           : mod_id,
-            mod_version      : version,
-            mod_name         : mod_name,
-            mod_license      : mod_license,
-            mod_authors      : mod_authors,
-            mod_description  : mod_description,
-            mod_homepage_url : mod_homepage_url,
-            mod_issues_url   : mod_issues_url,
-            mod_update_url   : mod_update_url
-    ]
-    inputs.properties replaceProperties
-
+processResources {
     filesMatching(["META-INF/mods.toml"]) {
-        expand replaceProperties + [project: project]
+        expand rootProject.properties
     }
 }

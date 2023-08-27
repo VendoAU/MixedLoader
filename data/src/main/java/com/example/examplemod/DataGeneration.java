@@ -10,7 +10,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.concurrent.CompletableFuture;
 
-@Mod("mixedloader_datagen")
+@Mod(Constants.MOD_ID)
 public class DataGeneration {
 
     public DataGeneration() {

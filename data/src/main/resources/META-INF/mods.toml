@@ -5,7 +5,7 @@ loaderVersion="[47,)"
 license="All Rights Reserved"
 
 [[mods]]
-modId="mixedloader_datagen"
+modId="${mod_id}"
 version="1.0.0"
-displayName="MixedLoader data gen"
+displayName="${mod_id} data gen"
 description='''If you're seeing this then something has gone very wrong'''

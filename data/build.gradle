@@ -7,7 +7,7 @@ plugins {
 archivesBaseName = "${mod_name}-datagen-${minecraft_version}"
 
 minecraft {
-    mappings channel: mappings_channel, version: mappings_version
+    mappings channel: "parchment", version: "${parchment_version}-${minecraft_version}"
 
     copyIdeResources = true
 
@@ -28,14 +28,8 @@ dependencies {
     compileOnly project(":common")
 }
 
-tasks.withType(ProcessResources).configureEach {
-    var replaceProperties = [
-            mod_id  : mod_id,
-            mod_name: mod_name
-    ]
-    inputs.properties replaceProperties
-
+processResources {
     filesMatching(["META-INF/mods.toml"]) {
-        expand replaceProperties + [project: project]
+        expand rootProject.properties
     }
 }
