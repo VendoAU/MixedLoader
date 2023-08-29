@@ -28,8 +28,11 @@ dependencies {
     compileOnly project(":common")
 }
 
+// Use mods.toml from the forge module
 processResources {
-    filesMatching(["META-INF/mods.toml"]) {
-        expand rootProject.properties
+    from("../forge/src/main/resources") {
+        filesMatching(["META-INF/mods.toml"]) {
+            expand rootProject.properties
+        }
     }
 }
