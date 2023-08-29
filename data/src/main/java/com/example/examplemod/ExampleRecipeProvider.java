@@ -5,6 +5,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +23,6 @@ public class ExampleRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.DIAMOND)
                 .requires(ItemTags.DIRT)
                 .unlockedBy("has_dirt", has(ItemTags.DIRT))
-                .save(pWriter);
+                .save(pWriter, new ResourceLocation(Constants.MOD_ID, "diamond_from_dirt"));
     }
 }
